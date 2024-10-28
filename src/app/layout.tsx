@@ -10,7 +10,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="h-screen grid place-content-center w-full"> 
+        <header className="h-24 w-screen bg-green-300">
+                <h2>This is header</h2>
+        </header>
+        <main>
+            {children}
+        </main>
+        <footer className="h-24 w-screen bg-purple-300">
+<h2>This is footer</h2>
+        </footer>
+      </body>
     </html>
   )
 }
