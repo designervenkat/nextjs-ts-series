@@ -1,6 +1,7 @@
 import {notFound} from 'next/navigation'
 
-export default async function ProductDetails({ params }: { params: { productId: number } }) {
+export default async function ProductDetails(props: { params: Promise<{ productId: number }> }) {
+  const params = await props.params;
 
   let data = await fetch(`https://jsonplaceholder.typicode.com/users/${params.productId}`)
   let user = await data.json()
@@ -22,7 +23,6 @@ export default async function ProductDetails({ params }: { params: { productId: 
     </>
 
   )
-
 }
 
 
