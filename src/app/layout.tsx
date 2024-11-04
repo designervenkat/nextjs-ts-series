@@ -1,3 +1,4 @@
+import Navigation from '@/components/Navigation'
 import './main.css'
 import type { Metadata } from 'next'
 
@@ -19,8 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="h-screen grid place-content-center w-full"> 
+      <body className="h-screen bg-slate-900 text-slate-400 grid place-content-center w-full"> 
        
+        <Navigation />
         <main>
             {children}
         </main>
