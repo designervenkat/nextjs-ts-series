@@ -1,30 +1,26 @@
-import {notFound} from 'next/navigation'
+"use client"
+import React from 'react'
+import { notFound } from 'next/navigation'
 
-export default async function ProductDetails(props: { params: Promise<{ productId: number }> }) {
-  const params = await props.params;
-
-  let data = await fetch(`https://jsonplaceholder.typicode.com/users/${params.productId}`)
-  let user = await data.json()
+type Params = Promise<{
+  productId: number;
+}>
 
 
-  if(params.productId > 100){
+
+export default async function page({ params }: { params: Params }) {
+  const { productId } = await params;
+
+  if (productId > 1000) {
+
     notFound()
+
   }
-
   return (
-    <>
-      <h2>Product Details - {params.productId}</h2>
 
-      <ul>
-        {user.id}
-        {user.name}
-        {user.email}
-      </ul>
-    </>
+    <div>
 
+      <h2>Product : {productId}</h2>
+    </div>
   )
 }
-
-
-
-

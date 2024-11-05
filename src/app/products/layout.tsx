@@ -5,7 +5,7 @@ export default function RootLayout({
 }) {
   return (
   
-            <section className="block bg-red-300 h-[499px] w-full">{children}</section>
+            <section>{children}</section>
   
   
   )
