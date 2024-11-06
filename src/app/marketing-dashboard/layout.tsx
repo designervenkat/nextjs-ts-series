@@ -29,30 +29,4 @@ export default function Marketinglayout({
   <div className="p-20 m-3 border border-slate-400 flex items-center justify-center">{login}</div>
   )
 
-  
-
-  
-     
-
-
-
-
-
-
-  {/*     
-
-if(isLoggedIn) return (
-    <div>
-      {children}
-      <div className="grid grid-cols-2">
-        <div className="p-20 m-3 border border-slate-400 flex items-center justify-center">{team}</div>
-        <div className="p-20 m-3 border border-slate-400 flex items-center justify-center">{marketing}</div>
-        <div className="p-20 m-3 border border-slate-400 flex items-center justify-center">{notification}</div>
-      </div>
-    </div>
-    )
-    
-    <div className="p-20 m-3 border border-slate-400 flex items-center justify-center">{login}</div>
-  </div> */}
-
 }

@@ -1,26 +1,29 @@
-"use client"
-import React from 'react'
-import { notFound } from 'next/navigation'
+export default async function ProductDetails(
+  { params, searchParams }: { params: { productId: number }, searchParams: Promise<{ [key:string]: string | string[] | undefined}> }
+  // { params }: {params: Promise<{productId: string}>} 
+) {
+  console.log(params);
+  // props prameters
+  const { productId } = await params
+  // const productId = (await params).productId
 
-type Params = Promise<{
-  productId: number;
-}>
+  // search parameters
+  const { name, storage, color } = await searchParams
+   
+  // const name = (await searchParams).name
+  //  const storage = (await searchParams).storage
+  //  const color = (await searchParams).color
 
-
-
-export default async function page({ params }: { params: Params }) {
-  const { productId } = await params;
-
-  if (productId > 1000) {
-
-    notFound()
-
-  }
   return (
-
     <div>
-
-      <h2>Product : {productId}</h2>
+      Product Detail Page for <br />
+      
+      Product Number - {productId} <br />
+      Product Name - {name} <br />
+      Product Storage = {storage} <br />
+      Product Color =  {color}
     </div>
   )
 }
+
+

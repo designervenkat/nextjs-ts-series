@@ -1,4 +1,4 @@
-import Navigation from '@/components/Navigation'
+
 import './main.css'
 import type { Metadata } from 'next'
 
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   description: 'Learn code for anywhere',
 }
 
-// name of page | website
 
 
 export default function RootLayout({
@@ -22,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="h-screen bg-slate-900 text-slate-400 grid place-content-center w-full"> 
        
-        <Navigation />
+      
         <main>
             {children}
         </main>

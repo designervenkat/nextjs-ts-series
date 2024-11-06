@@ -1,12 +1,9 @@
-export default function RootLayout({
+export default function ProductLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-  
-            <section>{children}</section>
-  
-  
+    <section>{children}</section>
   )
 }
