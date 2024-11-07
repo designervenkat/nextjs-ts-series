@@ -1,14 +1,16 @@
+"use client"
+
 import Link from 'next/link'
-import React from 'react'
+import {use} from 'react'
 
 function getRandomNum(num: number) {
   return Math.floor(Math.random() * num)
 }
 
-export default async function Reviews(
+export default  function Reviews(
   { params }: { params: Promise<{ productId: string, reviewId: string }>, }) {
 
-  const { productId, reviewId } = await params
+  const { productId, reviewId } = use(params)
 
   const random = getRandomNum(2)
 
