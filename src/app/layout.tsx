@@ -1,17 +1,4 @@
-
-import './main.css'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: {
-    default: "Code Today!",    
-    template: "%s | CodeToday! HERE"
-  },
-  description: 'Learn code for anywhere',
-}
-
-
-
+import './styles.css'
 export default function RootLayout({
   children,
 }: {
@@ -19,13 +6,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="h-screen bg-slate-900 text-slate-400 grid place-content-center w-full"> 
-       
-      
-        <main>
-            {children}
-        </main>
-     
+      <body className="h-screen bg-slate-900 text-slate-400 w-full mx-auto max-w-screen-xl p-10 flex items-center flex-col justify-start">
+        {children}
       </body>
     </html>
   )
