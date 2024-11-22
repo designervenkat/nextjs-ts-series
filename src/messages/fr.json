@@ -1,0 +1,17 @@
+{
+  "HomePage": {
+    "title": "Bonjour Internationalisation!",
+    "about": "Aller à la page À propos"
+  },
+  "NotFoundPage": {
+    "title": "Page Non Trouvée",
+    "description": "Oups! Il semble que vous soyez tombé sur une page qui n'existe pas. Ne vous inquiétez pas, notre magie d'internationalisation fonctionne toujours dans d'autres parties de l'application. N'hésitez pas à naviguer pour en découvrir plus!"
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "about": "About from franch"
+  },
+  "Footer": {
+    "copyright": "© 2024 Internationalisation. Tous droits réservés."
+  }
+}
