@@ -1,7 +1,7 @@
 import { addProduct } from '@/actions/productsAction'
 import Button from '@/components/Button'
+import TransButton from '@/components/TransitionBtn'
 import { Product } from '@/types/products'
-import { revalidatePath, revalidateTag } from 'next/cache'
 import Link from 'next/link'
 
 export default async function Home() {
@@ -23,7 +23,7 @@ export default async function Home() {
         Server Action | Server Mutation | useTransistions | useFormStatus
       </h2>
       <h2 className="text-2xl font-mono font-semibold text-slate-500">
-        Products
+        Products <TransButton />
       </h2>
 
       <div className="grid grid-cols-3">
