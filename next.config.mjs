@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     domains: ['tanstack.com'],
   },
+  reactStrictMode: false,
 }
 
 export default nextConfig

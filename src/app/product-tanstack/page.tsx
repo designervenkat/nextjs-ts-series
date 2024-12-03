@@ -4,16 +4,24 @@ import { Products } from '@/types/products-types'
 
 import { useQuery } from '@tanstack/react-query'
 import { getAllProducts } from '@/utils/products'
+import Link from 'next/link'
 
 export default function TanstackProducts() {
   const {
-    isLoading: productLoading,
+    isFetching,
+    isPending: productLoading,
     isError: productError,
     data: products,
   } = useQuery<Products[]>({
     queryKey: ['products'], // useState
     queryFn: async () => getAllProducts(), // useEffect
+    // gcTime: 300000, // milliseconds
+    // staleTime: 30000, // by default it is zero
+    // refetchOnMount: 'always',
+    // refetchOnWindowFocus: 'always',
   })
+
+  console.log('Fetching :', isFetching, 'Loading :', productLoading)
 
   if (productError)
     return (
@@ -29,9 +37,11 @@ export default function TanstackProducts() {
       {!productLoading && products ? (
         <div className="grid grid-cols-2 gap-4 place-content-center">
           {products.map((item) => (
-            <div className="bg-gray-700 py-4 px-4 rounded-md" key={item.id}>
-              {item.productName} - {item.productPrice}
-            </div>
+            <Link href={`/product-tanstack/details/${item.id}`} key={item.id}>
+              <div className="bg-gray-700 py-4 px-4 rounded-md">
+                {item.productName} - {item.productPrice}
+              </div>
+            </Link>
           ))}
         </div>
       ) : (
