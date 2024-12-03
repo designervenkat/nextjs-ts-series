@@ -10,7 +10,7 @@ export default function ClientComponentProducts() {
 
   const getAllProducts = async () => {
     const res = await fetch(
-      'https://672e2363229a881691ef1d2d.mockapi.io/productss'
+      'https://672e2363229a881691ef1d2d.mockapi.io/products'
     )
 
     if (!res.ok) {
