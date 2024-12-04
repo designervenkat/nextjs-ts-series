@@ -1,7 +1,7 @@
 import { TanstackProvider } from '@/providers/tanstack-provider'
 import './main.css'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Toaster } from 'react-hot-toast'
 import Header from '@/components/Header'
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="bg-slate-950">
         <Header />
         <TanstackProvider>{children}</TanstackProvider>
-        {/* <Toaster position="bottom-center" />  */}
+        <Toaster position="top-right" />
       </body>
     </html>
   )

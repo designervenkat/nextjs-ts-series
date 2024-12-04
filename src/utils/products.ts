@@ -1,7 +1,7 @@
 import { Products } from '@/types/products-types'
 
-const fetchData = async (url: string) => {
-  const res = await fetch(url)
+const fetchData = async <T>(url: string, options?: RequestInit): Promise<T> => {
+  const res = await fetch(url, options)
   if (!res.ok) {
     throw new Error('Something went wrong during fetching data')
   }
@@ -15,4 +15,17 @@ export const getAllProducts = async (): Promise<Products[]> => {
 
 export const getSingleProduct = async (id: string): Promise<Products> => {
   return fetchData(`https://672e2363229a881691ef1d2d.mockapi.io/products/${id}`)
+}
+
+export const createProduct = async (
+  product: Omit<Products, 'id'>
+): Promise<Products> => {
+  return fetchData('https://672e2363229a881691ef1d2d.mockapi.io/products', {
+    method: 'POST',
+    headers: {
+      // "Auth-Token": "",
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(product),
+  })
 }
