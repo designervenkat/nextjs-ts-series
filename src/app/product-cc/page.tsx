@@ -44,7 +44,9 @@ export default function ClientComponentProducts() {
       {!isLoading && products ? (
         <div className="grid grid-cols-2 gap-4 place-content-center">
           {products.map((item) => (
-            <div className="bg-gray-700 py-4 px-4 rounded-md" key={item.id}>
+            <div
+              className="bg-gray-800 text-slate-300 py-4 px-4 rounded-md"
+              key={item.id}>
               {item.productName} - {item.productPrice}
             </div>
           ))}

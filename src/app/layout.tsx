@@ -2,6 +2,7 @@ import { TanstackProvider } from '@/providers/tanstack-provider'
 import './main.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: {
@@ -13,37 +14,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className="h-screen bg-slate-900 text-slate-400 grid items-start justify-start w-full py-20 max-w-screen-xl">
-        <header className="flex w-full items-start ml-20 gap-x-4 mx-auto">
-          <Link
-            className="bg-purple-200 text-purple-700 font-semibold px-8 py-4 rounded-md"
-            href="/">
-            Home
-          </Link>
-          <Link
-            className="bg-orange-200 text-orange-700 font-semibold px-8 py-4 rounded-md"
-            href="/product-cc">
-            Regular Fetch
-          </Link>
-          <Link
-            className="bg-sky-200 text-sky-700 font-semibold px-8 py-4 rounded-md"
-            href="/product-sc">
-            Server Fetch
-          </Link>
-          <Link
-            className="bg-green-200 text-green-700 font-semibold px-8 py-4 rounded-md"
-            href="/product-tanstack">
-            Tanstack RQ
-          </Link>
-        </header>
-        <TanstackProvider>
-          <main>{children}</main>
-        </TanstackProvider>
+      <body className="bg-slate-950">
+        <Header />
+        <TanstackProvider>{children}</TanstackProvider>
+        {/* <Toaster position="bottom-center" />  */}
       </body>
     </html>
   )

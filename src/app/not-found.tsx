@@ -1,7 +1,7 @@
 export default function NotFound() {
   return (
-    <div>
-      <h2>Not Found Please go back home</h2>
-    </div>
+    <h2 className="text-slate-400 text-center mt-20">
+      Not Found Please go back home
+    </h2>
   )
 }
