@@ -13,10 +13,6 @@ export const getAllProducts = async (): Promise<Products[]> => {
   return fetchData('https://672e2363229a881691ef1d2d.mockapi.io/products')
 }
 
-export const getSingleProduct = async (id: string): Promise<Products> => {
-  return fetchData(`https://672e2363229a881691ef1d2d.mockapi.io/products/${id}`)
-}
-
 export const createProduct = async (
   product: Omit<Products, 'id'>
 ): Promise<Products> => {
@@ -28,4 +24,25 @@ export const createProduct = async (
     },
     body: JSON.stringify(product),
   })
+}
+
+export const getSingleProduct = async (id: string): Promise<Products> => {
+  return fetchData(`https://672e2363229a881691ef1d2d.mockapi.io/products/${id}`)
+}
+
+export const fetchCommentByProductId = async (id: string) => {
+  const res = await fetch(
+    `https://672e2363229a881691ef1d2d.mockapi.io/products/${id}/comments`
+  )
+  if (!res.ok) throw new Error("Oh no! can't find the product")
+  const data = await res.json()
+  console.log(data)
+
+  return data
+}
+
+export const paginatedProducts = async (page: number): Promise<Products[]> => {
+  return fetchData(
+    `https://672e2363229a881691ef1d2d.mockapi.io/products?limit=10&page=${page}`
+  )
 }

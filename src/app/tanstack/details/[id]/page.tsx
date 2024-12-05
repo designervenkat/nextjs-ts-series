@@ -1,12 +1,15 @@
 'use client'
 
-import { getSingleProduct } from '@/utils/products'
+import { Comment } from '@/types/comments-types'
+import { fetchCommentByProductId, getSingleProduct } from '@/utils/products'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 export default function DetailPage() {
   const { id } = useParams<{ id: string }>()
+
+  // fetch single product
 
   const {
     data: productDetail,
@@ -16,6 +19,20 @@ export default function DetailPage() {
   } = useQuery({
     queryKey: ['products', id],
     queryFn: () => getSingleProduct(id),
+  })
+
+  const productId = productDetail?.id
+
+  // fetch comments
+  const {
+    data: productComment,
+    isPending: loadingComment,
+    isError: isCommentError,
+    error: commentError,
+  } = useQuery<Comment[]>({
+    queryKey: ['comments', id],
+    queryFn: () => fetchCommentByProductId(id),
+    enabled: !!productId,
   })
 
   if (isPending)
@@ -29,6 +46,20 @@ export default function DetailPage() {
     return (
       <div className="h-screen grid items-start text-center text-slate-50 mt-20">
         <p>Failed to load product: {error.message}</p>
+      </div>
+    )
+
+  if (loadingComment)
+    return (
+      <div className="h-screen grid items-start text-center text-slate-50 mt-20">
+        Comments Loading...
+      </div>
+    )
+
+  if (isCommentError)
+    return (
+      <div className="h-screen grid items-start text-center text-slate-50 mt-20">
+        <p>Failed to load comment: {commentError.message}</p>
       </div>
     )
 
@@ -59,9 +90,13 @@ export default function DetailPage() {
         <div className=" mt-10 text-slate-100">
           <h2 className="mb-4">Comments</h2>
           <ul>
-            <li
-              className="bg-slate-700 p-8 my-4 rounded-md text-slate-200 font"
-              key=""></li>
+            {productComment.map((comment: Comment) => (
+              <li
+                className="bg-slate-700 p-8 my-4 rounded-md text-slate-200 font"
+                key={comment.id}>
+                {comment.productId} - {comment.comments}
+              </li>
+            ))}
           </ul>
         </div>
       </div>

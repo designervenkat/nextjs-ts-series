@@ -2,33 +2,25 @@
 
 import { Products } from '@/types/products-types'
 
-import { useQuery } from '@tanstack/react-query'
-import { getAllProducts } from '@/utils/products'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { paginatedProducts } from '@/utils/products'
 import Link from 'next/link'
-import AddProduct from '@/components/AddProduct'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-export default function TanstackProducts() {
+export default function PaginatedProducts() {
+  const [page, setPage] = useState(1)
+
   const {
     isFetching,
     isPending: productLoading,
     isError: productError,
     data: products,
     isSuccess,
-    refetch,
   } = useQuery<Products[]>({
-    queryKey: ['products'], // useState
-    queryFn: getAllProducts, // useEffect
-    // gcTime: 300000, // milliseconds
-    // staleTime: 30000, // by default it is zero
-    // refetchOnMount: 'always',
-    // refetchOnWindowFocus: 'always',
-
-    // Polling
-    // refetchInterval: 2000,
-    // refetchIntervalInBackground: true,
-    // enabled: false, // default true
+    queryKey: ['products', page],
+    queryFn: () => paginatedProducts(page),
+    placeholderData: keepPreviousData,
   })
 
   useEffect(() => {
@@ -79,6 +71,29 @@ export default function TanstackProducts() {
           Product Loading...
         </div>
       )}
+
+      <div className="flex gap-x-4 items-center justify-between mt-10">
+        <button
+          className={
+            page === 1
+              ? 'bg-gray-300 py-2 w-44 rounded-sm text-slate-500'
+              : 'bg-orange-200 py-2 w-44 rounded-sm text-orange-800'
+          }
+          onClick={() => setPage((page) => page - 1)}
+          disabled={page === 1}>
+          Previous Page
+        </button>
+        <button
+          className={
+            page === 3
+              ? 'bg-gray-300 py-2 w-44 rounded-sm text-slate-500'
+              : 'bg-green-200 py-2 w-44 rounded-sm text-green-800'
+          }
+          disabled={page === 3}
+          onClick={() => setPage((page) => page + 1)}>
+          Next Page
+        </button>
+      </div>
     </div>
   )
 }
