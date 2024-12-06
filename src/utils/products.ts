@@ -1,4 +1,5 @@
 import { Products } from '@/types/products-types'
+import axios from 'axios'
 
 const fetchData = async <T>(url: string, options?: RequestInit): Promise<T> => {
   const res = await fetch(url, options)
@@ -46,3 +47,47 @@ export const paginatedProducts = async (page: number): Promise<Products[]> => {
     `https://672e2363229a881691ef1d2d.mockapi.io/products?limit=10&page=${page}`
   )
 }
+
+// Infinite Scroll One
+export const fetchInfiniteScrollOne = async ({ pageParam = 1 }) => {
+  try {
+    const res = await axios.get(
+      `https://672e2363229a881691ef1d2d.mockapi.io/products?limit=10&page=${pageParam}`
+    )
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// Infinite Scroll Two
+
+export const fetchInfiniteScrollTwo = async ({
+  pageParam = 1,
+}: {
+  pageParam: number
+}): Promise<{
+  data: Products[]
+  currentPage: number
+  nextPage: number | null
+}> => {
+  try {
+    const res = await axios.get(
+      `https://672e2363229a881691ef1d2d.mockapi.io/products?limit=10&page=${pageParam}`
+    )
+
+    const nextPage = pageParam + 1
+    const isLastPage = res.data.length < 10
+
+    return {
+      data: res.data,
+      currentPage: pageParam,
+      nextPage: isLastPage ? null : nextPage,
+    }
+  } catch (error) {
+    console.log(error)
+    throw new Error('Failed')
+  }
+}
+
+// Promise<{ data: Products[]; currentPage: number; nextPage: number | null }>
